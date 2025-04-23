@@ -26,6 +26,7 @@ export function sendWindowNotification(message: string) {
     }
     return;
   }
+  (window as any).AndroidInterface?.showToast(message);
 
   alert(message);
 }

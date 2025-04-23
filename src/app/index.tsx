@@ -22,6 +22,7 @@ export default function App() {
       }
     };
 
+    sendWindowNotification('test');
     getPermissions();
 
     // Đăng ký listener khi app đang mở
