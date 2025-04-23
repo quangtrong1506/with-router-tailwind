@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "userInterfaceStyle": "automatic",
+    "orientation": "default",
+    "web": {
+      "output": "static"
+    },
+    "plugins": ["expo-router"],
+    "android": {
+      "package": "com.quangtrong1506.test.tb"
+    }
+  }
+}
