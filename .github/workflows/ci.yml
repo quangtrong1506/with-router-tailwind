@@ -30,6 +30,9 @@ jobs:
         with:
           api-level: 29 # Cài đặt Android API level
 
+      - name: Grant execute permission to gradlew
+        run: chmod +x android/gradlew # Cấp quyền thực thi cho tệp gradlew
+
       - name: Build APK
         run: |
           cd android
