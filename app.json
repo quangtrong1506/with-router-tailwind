@@ -6,9 +6,19 @@
     "web": {
       "output": "static"
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router"
+    ],
     "android": {
       "package": "com.quangtrong1506.test.tb"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "13e0c780-aae5-4be6-b1e7-46ef06cf2edc"
+      }
     }
   }
 }
