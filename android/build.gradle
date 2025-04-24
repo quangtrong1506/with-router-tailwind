@@ -22,9 +22,6 @@ buildscript {
     }
 }
 
-apply plugin: "com.facebook.react.rootproject"
-apply plugin: 'com.google.gms.google-services' // thêm cái này #add2
-
 allprojects {
     repositories {
         maven {
