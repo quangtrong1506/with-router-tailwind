@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, TextInput, View } from 'react-native';
-import messaging from '@react-native-firebase/messaging';
+import messaging, { sendMessage } from '@react-native-firebase/messaging';
 import { getFcmToken, sendWindowNotification } from '@/helpers';
 
 export default function App() {
@@ -17,6 +17,7 @@ export default function App() {
                 sendWindowNotification('Chưa cấp quyền thông báo, Không thể nhận thông báo nền');
                 throw new Error('Chưa cấp quyền thông báo');
             }
+            sendWindowNotification('Đã cấp quyền thông báo');
             setLoaded(true);
         };
 
@@ -24,9 +25,12 @@ export default function App() {
     }, []);
     useEffect(() => {
         if (!loaded) return;
+        sendWindowNotification('Get Token');
+
         getFcmToken()
             .then((tk) => {
                 setToken(tk);
+                sendWindowNotification('Token: ' + tk);
             })
             .catch((e) => {
                 sendWindowNotification(e);
@@ -41,8 +45,8 @@ export default function App() {
     }, [loaded]);
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>🎯 Expo Push Notifications Demo</Text>
-            {token && <Text>Your Expo Push Token:</Text>}
+            <Text>Push Notifications Demo</Text>
+            {token && <Text>Your FCM Token:</Text>}
             {token && <TextInput value={token} />}
         </View>
     );
