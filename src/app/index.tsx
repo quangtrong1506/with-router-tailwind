@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Text, TextInput, View } from 'react-native';
 import messaging, { sendMessage } from '@react-native-firebase/messaging';
-import { getFcmToken, sendWindowNotification } from '@/helpers';
+import { getFcmToken, requestAndroidNotificationPermission, sendWindowNotification } from '@/helpers';
 
 export default function App() {
     const [token, setToken] = useState<string | null>(null);
@@ -9,6 +9,9 @@ export default function App() {
 
     useEffect(() => {
         const firstHandle = async () => {
+            requestAndroidNotificationPermission().then((granted) => {
+                if (!granted) sendWindowNotification('❌ Từ chối quyền thông báo Android');
+            });
             const authStatus = await messaging().requestPermission();
             const enabled =
                 authStatus === messaging.AuthorizationStatus.AUTHORIZED ||

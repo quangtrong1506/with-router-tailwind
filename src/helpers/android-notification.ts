@@ -1,3 +1,5 @@
+import { PermissionsAndroid, Platform } from 'react-native';
+
 /**
  * Gửi thông báo đến Android (qua AndroidInterface) hoặc iOS (qua WebKit handler hoặc alert fallback).
  * @param message Chuỗi thông báo cần hiển thị
@@ -27,4 +29,12 @@ export function sendWindowNotification(message: string) {
         return;
     }
     alert(message);
+}
+
+export async function requestAndroidNotificationPermission(): Promise<boolean> {
+    if (Platform.OS === 'android' && Platform.Version >= 33) {
+        const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
+        return granted === PermissionsAndroid.RESULTS.GRANTED;
+    }
+    return true;
 }
