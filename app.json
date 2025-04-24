@@ -1,15 +1,19 @@
 {
     "expo": {
+        "name": "Thông báo nền (Preview)",
+        "slug": "Thông báo nền (Preview)",
+        "version": "1.0.1",
         "scheme": "acme",
         "userInterfaceStyle": "automatic",
         "orientation": "default",
         "web": {
             "output": "static"
         },
-        "plugins": ["expo-router"],
+        "plugins": ["expo-router", "@react-native-firebase/app", "@react-native-firebase/auth"],
         "android": {
             "name": "Thông báo nền (Preview)",
-            "package": "com.quangtrong1506.test.tb"
+            "package": "com.quangtrong1506.test.tb",
+            "googleServicesFile": "./firebase/google-services.json"
         },
         "extra": {
             "router": {
