@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, TextInput, View } from 'react-native';
-import messaging, { sendMessage } from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 import { getFcmToken, requestAndroidNotificationPermission, sendWindowNotification } from '@/helpers';
 
 export default function App() {
@@ -18,7 +18,6 @@ export default function App() {
                 authStatus === messaging.AuthorizationStatus.PROVISIONAL;
             if (!enabled) {
                 sendWindowNotification('Chưa cấp quyền thông báo, Không thể nhận thông báo nền');
-                throw new Error('Chưa cấp quyền thông báo');
             }
             sendWindowNotification('Đã cấp quyền thông báo');
             setLoaded(true);
@@ -27,7 +26,6 @@ export default function App() {
         firstHandle();
     }, []);
     useEffect(() => {
-        if (!loaded) return;
         sendWindowNotification('Get Token');
 
         getFcmToken()
@@ -49,6 +47,14 @@ export default function App() {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text>Push Notifications Demo</Text>
+            <View
+                className="bg-blue-500 p-2"
+                onTouchStart={() => {
+                    sendWindowNotification('Click');
+                }}
+            >
+                <Text>Ấn vào đây</Text>
+            </View>
             {token && <Text>Your FCM Token:</Text>}
             {token && <TextInput value={token} />}
         </View>
