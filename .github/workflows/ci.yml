@@ -3,14 +3,14 @@ name: Build APK
 on:
     push:
         branches:
-            - master
+            - master # Chạy khi có commit trên nhánh master
     pull_request:
         branches:
-            - master
+            - master # Chạy khi có pull request vào nhánh master
 
 jobs:
     build:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-latest # Sử dụng Ubuntu để build
 
         steps:
             - name: Checkout code
@@ -19,43 +19,27 @@ jobs:
             - name: Set up Node.js
               uses: actions/setup-node@v2
               with:
-                  node-version: '20'
+                  node-version: '20' # Chọn phiên bản Node.js mà bạn sử dụng
 
             - name: Install dependencies
-              run: npm install
+              run: |
+                  npm install
 
             - name: Set up Android SDK
               uses: android-actions/setup-android@v2
               with:
-                  api-level: 29
+                  api-level: 29 # Cài đặt Android API level
 
             - name: Grant execute permission to gradlew
-              run: chmod +x android/gradlew
+              run: chmod +x android/gradlew # Cấp quyền thực thi cho tệp gradlew
 
             - name: Build APK
               run: |
                   cd android
-                  ./gradlew assembleRelease
+                  ./gradlew assembleRelease  # Tạo APK release
 
-            - name: Create Release
-              if: github.event_name == 'push' # ⚠️ Chỉ tạo release khi push (ko phải PR từ fork)
-              id: create_release
-              uses: actions/create-release@v1
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Upload build artifact
+              uses: actions/upload-artifact@v4 # Đã cập nhật lên phiên bản mới
               with:
-                  tag_name: v1.${{ github.run_number }}
-                  release_name: Release v1.${{ github.run_number }}
-                  draft: false
-                  prerelease: false
-
-            - name: Upload APK to Release
-              if: github.event_name == 'push' # ⚠️ Chỉ upload khi push
-              uses: actions/upload-release-asset@v1
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              with:
-                  upload_url: ${{ steps.create_release.outputs.upload_url }}
-                  asset_path: android/app/build/outputs/apk/release/app-release.apk
-                  asset_name: app-release.apk
-                  asset_content_type: application/vnd.android.package-archive
+                  name: apk-artifact
+                  path: android/app/build/outputs/apk/release/app-release.apk # Đảm bảo đường dẫn chính xác
