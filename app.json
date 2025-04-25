@@ -1,31 +1,97 @@
 {
-  "expo": {
-    "name": "Thông báo nền (Preview)",
-    "slug": "thong-bao-nen-preview",
-    "version": "1.0.1",
-    "scheme": "acme",
-    "userInterfaceStyle": "automatic",
-    "orientation": "default",
-    "web": {
-      "output": "static"
-    },
-    "plugins": [
-      "expo-router",
-      "@react-native-firebase/app",
-      "@react-native-firebase/auth"
-    ],
-    "android": {
-      "name": "Thông báo nền (Preview)",
-      "package": "com.quangtrong1506.test.tb",
-      "googleServicesFile": "./firebase/google-services.json"
-    },
-    "extra": {
-      "router": {
-        "origin": false
-      },
-      "eas": {
-        "projectId": "eece446f-18a2-4405-b23c-644d3621fc42"
-      }
+    "expo": {
+        "name": "Thông báo nền (Preview)",
+        "slug": "thong-bao-nen-preview",
+        "version": "1.0.1",
+        "scheme": "acme",
+        "userInterfaceStyle": "automatic",
+        "orientation": "default",
+        "icon": "./assets/icon.png",
+        "splash": {
+            "image": "./assets/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
+        },
+        "web": {
+            "output": "static"
+        },
+        "plugins": [
+            "expo-router",
+            "@react-native-firebase/app",
+            "@react-native-firebase/auth",
+            [
+                "expo-build-properties",
+                {
+                    "android": {
+                        "compileSdkVersion": 35,
+                        "targetSdkVersion": 34,
+                        "buildToolsVersion": "35.0.0",
+                        "kotlinVersion": "1.9.25",
+                        "ndkVersion": "26.1.10909125"
+                    },
+                    "ios": {
+                        "deploymentTarget": "15.1"
+                    }
+                }
+            ]
+        ],
+        "android": {
+            "name": "Thông báo nền (Preview)",
+            "package": "com.quangtrong1506.test.tb",
+            "googleServicesFile": "./firebase/google-services.json",
+            "permissions": [
+                "INTERNET",
+                "ACCESS_NETWORK_STATE",
+                "READ_EXTERNAL_STORAGE",
+                "WRITE_EXTERNAL_STORAGE",
+                "POST_NOTIFICATIONS",
+                "RECEIVE_BOOT_COMPLETED",
+                "SYSTEM_ALERT_WINDOW",
+                "VIBRATE"
+            ],
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/adaptive-icon.png",
+                "backgroundColor": "#ffffff"
+            },
+            "intentFilters": [
+                {
+                    "action": "VIEW",
+                    "data": [
+                        {
+                            "scheme": "https"
+                        },
+                        {
+                            "scheme": "acme"
+                        },
+                        {
+                            "scheme": "com.quangtrong1506.withroutertailwind"
+                        },
+                        {
+                            "scheme": "com.quangtrong1506.test.tb"
+                        }
+                    ],
+                    "category": ["BROWSABLE", "DEFAULT"]
+                }
+            ]
+        },
+        "ios": {
+            "bundleIdentifier": "com.quangtrong1506.test.tb",
+            "infoPlist": {
+                "UIBackgroundModes": ["remote-notification"],
+                "NSCameraUsageDescription": "Ứng dụng cần truy cập camera để chụp ảnh.",
+                "NSPhotoLibraryUsageDescription": "Ứng dụng cần truy cập thư viện ảnh để chọn ảnh.",
+                "NSLocationWhenInUseUsageDescription": "Ứng dụng cần truy cập vị trí để hoạt động chính xác.",
+                "NSUserTrackingUsageDescription": "Chúng tôi cần quyền để cá nhân hóa trải nghiệm quảng cáo."
+            },
+            "supportsTablet": true
+        },
+        "extra": {
+            "router": {
+                "origin": false
+            },
+            "eas": {
+                "projectId": "eece446f-18a2-4405-b23c-644d3621fc42"
+            }
+        }
     }
-  }
 }
