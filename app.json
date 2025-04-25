@@ -1,27 +1,31 @@
 {
-    "expo": {
-        "name": "Thông báo nền (Preview)",
-        "slug": "Thông báo nền (Preview)",
-        "version": "1.0.1",
-        "scheme": "acme",
-        "userInterfaceStyle": "automatic",
-        "orientation": "default",
-        "web": {
-            "output": "static"
-        },
-        "plugins": ["expo-router", "@react-native-firebase/app", "@react-native-firebase/auth"],
-        "android": {
-            "name": "Thông báo nền (Preview)",
-            "package": "com.quangtrong1506.test.tb",
-            "googleServicesFile": "./firebase/google-services.json"
-        },
-        "extra": {
-            "router": {
-                "origin": false
-            },
-            "eas": {
-                "projectId": "13e0c780-aae5-4be6-b1e7-46ef06cf2edc"
-            }
-        }
+  "expo": {
+    "name": "Thông báo nền (Preview)",
+    "slug": "thong-bao-nen-preview",
+    "version": "1.0.1",
+    "scheme": "acme",
+    "userInterfaceStyle": "automatic",
+    "orientation": "default",
+    "web": {
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router",
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth"
+    ],
+    "android": {
+      "name": "Thông báo nền (Preview)",
+      "package": "com.quangtrong1506.test.tb",
+      "googleServicesFile": "./firebase/google-services.json"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "eece446f-18a2-4405-b23c-644d3621fc42"
+      }
     }
+  }
 }
